@@ -1,0 +1,125 @@
+<!--<!doctype html>
+<html>
+<style>
+body{
+background: {url({{ url_for ('static', filename = 'hi.png') }});
+background-size: 95%;
+}
+h1{
+	font-size: 40px;
+	color: white;
+}	
+form {
+    margin: auto;
+    width: 35%;
+    color: white;
+}
+.result {
+    margin: auto;
+    width: 35%;
+    border: 1px solid #ccc;
+color: white;
+}
+.hi {
+  border: 1px solid #ccc;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+}
+</style>
+<head>
+    <title>Heart abnormality detector</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+</head>
+<body background="hi.png">
+<h1><center>Heart Abnormality Detector<center></h1>
+<br><br><br><br><br>
+<form action="{{ url_for('main') }}" method="POST" enctype = "multipart/form-data">
+  <center><input type="file" name="audio" accept="audio/*"style="size:300%" class="hi"><br><br></center>
+  <center><input type="submit" class="hi"></center>
+</form>
+<br><br><br><br><br><br><br><br><br>
+<div class="result" align="center" color="yellow" id="67" style="border:solid;color: white;">
+    {% if result %}
+        {% for variable, value in original_input.items() %}
+            <b>{{ variable }}</b> : {{ value }}
+        {% endfor %}
+        <br>
+        <br> Prediction:
+	{% if result=="NORMAL" %}
+	<script>
+	console.log("hi");
+	$('.result').css('background-color',"green");
+	</script>
+	{% else %}
+	<script>
+	$('.result').css('background-color',"red");
+	</script>
+	{% endif %}
+           <p style="font-size:50px;color: white;">{{ result }}</p>
+    {% endif %}
+</div>
+</body>
+</html>-->
+
+
+
+
+
+<!doctype html>
+<html>
+<style>
+form {
+    margin: auto;
+    width: 35%;
+    border: 10px solid #ccc;
+    padding: 50px;
+}
+.result {
+    margin: auto;
+    width: 35%;
+    border: 10px solid #ccc;
+    padding: 50px;
+}
+</style>
+<head>
+    <title>Heart Abnormality Detector</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+</head>
+<h1 style="font-size: 60px;"><center>Heart Abnormality Detector<center></h1>
+<br><br><br><br><br>
+<form action="{{ url_for('main') }}" method="POST" enctype = "multipart/form-data">
+  <center>Enter the audio recording:</center><br>
+  <center><input type="file" name="audio" accept="audio/*"><br><br></center>
+  <center><input type="submit" class="hi"></center>
+</form>
+<br><br><br>
+<div class="result" align="center">
+    {% if result %}
+        {% for variable, value in original_input.items() %}
+            <b>{{ variable }}</b> : {{ value }}
+        {% endfor %}
+        <br>
+        <br> Prediction:
+	{% if result=="NORMAL" %}
+	<script>
+	console.log("hi");
+	$('.result').css('background-color',"green");
+	</script>
+	{% else %}
+	<script>
+	$('.result').css('background-color',"red");
+	</script>
+	{% endif %}
+	{% if result=="ARTIFACT" %}
+           <p style="font-size:50px;">{{ result }}</p>
+	   <p>Please Record again carefully</p>
+	{% else %}
+	   <p style="font-size:50px;">{{ result }}</p>
+	{% endif %}
+    {% endif %}
+</div>
+</html>
